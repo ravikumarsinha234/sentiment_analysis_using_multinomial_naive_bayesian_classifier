@@ -43,3 +43,50 @@ Wrote 2000 words to vocablist_tweet.pkl.
 (Why is ”flightled” on this list? I have no idea. Real data is sometimes weird.)  
 
 ## Using the training data
+We will need to complete the program called tweet train.py that  
+• Reads in vocablist tweet.pkl.  
+• Goes through train tweet.csv row by row, counting the words These counts will be used
+to create a word frequency vector for each sentiment.  
+• It will also count the tweets for each sentiment, so that it can say things like ”63.3% of all
+these tweets are negative.”. These frequencies will act as your priors.  
+• Take the log of all the word frequencies and the sentiment frequencies. Save them both to a
+single file named frequencies tweet.pkl.  
+• Print out the 10 most positive words and the 10 most negative (as determined by the difference
+between the Sentiment 0 frequency and the Sentiment 2 frequency).  
+Words that don’t appear at all for a sentiment should be treated as if they appeared 0.5 times.
+When it runs, it should look something like this:  
+> python3 tweet_train.py  
+  
+Skipped 81 tweets: had no words from vocabulary  
+*** Tweets by sentiment ***  
+0 (negative): 63.5%  
+1 (neutral): 20.5%  
+2 (positive): 16.0%  
+Positive words:  
+thanks thank great love awesome best much good amazing guys  
+Negative words:  
+flight cancelled hours hold delayed call get flightled hour dont  
+
+## Test with the testing data
+
+You will need to complete the program called test tweet.py that  
+• Reads in vocablist tweet.pkl and frequencies tweet.pkl.  
+• Goes through test tweet.csv row by row, using Bayesian inference to guess if it is positive,
+negative, or neutral.  
+• At the end, it should give some statistics on its performance, like accuracy and a confusion
+matrix. This should include a baseline of ”How many would the system get right if it ignored
+the data and just guessed the most common class?”  
+• Besides a guess, the Bayesian Classifier gives us a probability that it is correct. If we discard
+the results that it is less sure of, we would expect it’s accuracy to increase. Make a plot
+showing this.  
+When it runs, it should look like this:  
+
+> python3 tweet_test.py  
+  
+Would get 63.5% accuracy by guessing "0" every time.
+Skipped 9 rows for having none of the common words
+1468 lines analyzed, 1162 correct (79.2% accuracy)  
+Confusion:  
+[[843 58 31]  
+[118 159 34]  
+[ 42 23 160]]  
